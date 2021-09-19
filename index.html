@@ -9,7 +9,9 @@
                 var artist = text.match(`product-creator(.|\\n)*?<\/a`)[0].match("(?<=>)([^><\\s].*?)(?=<)")[0];
                 console.log(album, cover, artist);
             };
-            req.open('GET', url);
+            
+            req.open('GET', "https://cors.bridged.cc/" + url);
+            req.setRequestHeader("Access-Control-Allow-Origin", "*");
             req.send();
         }
 
