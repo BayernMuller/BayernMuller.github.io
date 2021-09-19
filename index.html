@@ -1,21 +1,27 @@
 <svg width="495" height="195" viewBox="0 0 495 195" fill="none" xmlns="http://www.w3.org/2000/svg">
     <script type="text/javascript">
-        function fetchLocalResource(url) {
+        function urlValue(value) {
+            return location.search.match(value + "=([^&]+)")[1];
+        }
+
+        function loadTrack(url, track) {
             const req = new XMLHttpRequest();
             req.onload = function () {
                 const text = req.responseText;
                 var cover = text.match(`"product-lockup">(.|\\n)*?<\/div`)[0].match("https(.*?)webp")[0];
                 var album = text.match(`h1 id(.|\n)*?\/h1>`)[0].match("(?<=>)([^><\\s].*?)(?=<)")[0];
                 var artist = text.match(`product-creator(.|\\n)*?<\/a`)[0].match("(?<=>)([^><\\s].*?)(?=<)")[0];
-                console.log(album, cover, artist);
+                var title = text.match(new RegExp(/(?<=songs-list-row__song-name">)(.*)(?=<)/, "gm"))[track - 1].match("(?<=>)([^><\\s].*?)(?=<)")[0];
+                console.log(album, cover, artist, title);
             };
             
             req.open('GET', "https://cors.bridged.cc/" + url);
-            req.setRequestHeader("Access-Control-Allow-Origin", "*");
             req.send();
         }
+       
 
-        fetchLocalResource(location.search.split('album=')[1]);
+        loadTrack(urlValue("album"), urlValue("track"));
+        
     </script>
 </svg>
 
