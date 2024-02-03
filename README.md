@@ -1,4 +1,4 @@
 # Demos
 
-#### Qt GUI Web Assembly Snake Game
-* [](https://bayernmuller.github.io/snake_game/)https://bayernmuller.github.io/snake_game/
+
+* **[Qt GUI Web Assembly Snake Game](/snake_game/index.html)**
